@@ -1,21 +1,25 @@
 #! /usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-import bs4,requests
+import bs4,requests,time,random
 
 
 TIMEOUT     = 10
 URL         = "https://noauto-nolife.com/"
+DEFAULT_SLEEP   = 3
 
 
 #try except文
 try:
 
     #URLに対してGETメソッドのリクエストを送信する、10秒待っても応答がない場合はタイムアウトする。
+
     result  = requests.get(URL, timeout=TIMEOUT)
 
     #ステータスコード200(正常)以外の場合は例外として扱う。
     result.raise_for_status()
+    time.sleep(DEFAULT_SLEEP)
+
 
 except Exception as e:
 
@@ -45,5 +49,4 @@ else:
     #aタグのhref属性を抜き取って表示させる
     for link in links:
         print(link.get("href"))
-
 
